@@ -20,19 +20,6 @@ class ProductsController extends Controller
         return view('shopping-cart.index', compact('products'));
     }
 
-    public function shoppingCart(Request $request, $id) {
-        $product = Product::find($id);
-
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
-
-        $cart = new Cart($oldCart);
-        $cart->addItem($product, $product->id);
-
-        $request->session()->put('cart', $cart);
-
-        return redirect()->route('home');
-    }
-
     public function shoppingCartView() {
         if(Session::has('cart')) {
             // $products = Session::get('cart')->items;
@@ -45,6 +32,45 @@ class ProductsController extends Controller
         } else {
             return redirect()->route('home')->with(['alert-danger' => 'please select some items first']);
         }
+    }
+    
+    public function shoppingCart(Request $request, $id) {
+        $product = Product::find($id);
+
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+
+        $cart = new Cart($oldCart);
+        $cart->addItem($product);
+
+        $request->session()->put('cart', $cart);
+
+        return redirect()->route('home');
+    }
+
+    public function reduceItem($id) {
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+
+        $cart = new Cart($oldCart);
+        $cart->reduceByOne($id);
+
+        Session::put('cart', $cart);
+
+        return redirect()->back();
+    }
+
+    public function removeItem($id) {
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+
+        $cart = new Cart($oldCart);
+        $cart->removeItem($id);
+
+        if($cart->totalQty > 0) {
+            Session::put('cart', $cart);
+        } else {
+            Session::forget('cart');
+        }
+
+        return redirect()->back();
     }
 
     public function checkoutView() {

@@ -11,11 +11,18 @@
         <li class="list-group-item">
           <span>{{ $product['item']['title'] }}</span>
           <span class="badge badge-success">{{ $product['price'] }}</span>
-          <span class="badge badge-primary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action
+          {{-- <span class="badge badge-primary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Reduce by 1</a>
-              <a class="dropdown-item" href="#">Reduce All</a>
+              <a class="dropdown-item" href="/reduce/{{ $product['item']['id'] }}">Reduce by 1</a>
+              <a class="dropdown-item" href="/remove/{{ $product['item']['id'] }}">Reduce All</a>
             </div>
+          </span> --}}
+          <span class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Action</a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">            
+              <li><a href="/reduce/{{ $product['item']['id'] }}">Reduce by 1</a></li>
+              <li><a href="/remove/{{ $product['item']['id'] }}">Reduce All</a></li>
+            </ul>
           </span>
           <span class="badge float-right">{{ $product['qty'] }}</span>
         </li>

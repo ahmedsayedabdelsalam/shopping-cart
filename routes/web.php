@@ -30,5 +30,7 @@ Route::middleware('guest')->group(function() {
 
 Route::get('shopping-cart/{id}', 'ProductsController@shoppingCart');
 Route::get('shopping-cart', 'ProductsController@shoppingCartView');
+Route::get('reduce/{id}', 'ProductsController@reduceItem');
+Route::get('remove/{id}', 'ProductsController@removeItem');
 
 
