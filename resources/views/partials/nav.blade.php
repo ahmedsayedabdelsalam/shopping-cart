@@ -15,6 +15,9 @@
             <div class="dropdown-menu" aria-labelledby="dropdown07">
             @if(Auth::check())
                 <a class="dropdown-item" href="/user/profile">Profile</a>
+                @if(in_array('admin', \App\User::find(Auth::id())->roles->pluck('name')->toArray()))
+                    <a class="dropdown-item" href="/admin/dashbord">Admin Panel</a>
+                @endif
                 <a class="dropdown-item" href="/logout">Logout</a>
             @else
                 <a class="dropdown-item" href="/register">Signup</a>

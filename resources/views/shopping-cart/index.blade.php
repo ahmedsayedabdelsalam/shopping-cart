@@ -13,7 +13,7 @@
       @foreach($productChunk as $product)
         <div class=" col-lg-4">
           <div class="card mt-3">
-              <img class="card-img-top" src="{{ $product->imagePath }}" alt="Card image cap">
+              <img class="card-img-top" src="{{ asset('storage/product_images/' . $product->imagePath) }}" alt="Card image cap">
               <div class="card-body">
                 <h5 class="card-title">{{ $product->title }}</h5>
                 <p class="card-text">{{ $product->description }}</p>
