@@ -61,7 +61,7 @@ class ItemsController extends Controller
         $item->price = $request['price'];
         $item->save();
 
-        return redirect()->route('dashbord')->with('alert-info', 'item created successfully');
+        return redirect()->back()->with('alert-info', 'item created successfully');
     }
 
     /**
@@ -120,7 +120,7 @@ class ItemsController extends Controller
         $item->price = $request['price'];
         $item->save();
 
-        return redirect()->route('dashbord')->with('alert-info', 'item edited successfully');
+        return redirect()->back()->with('alert-info', 'item edited successfully');
 
     }
 
@@ -134,6 +134,6 @@ class ItemsController extends Controller
     {
         $item = Product::find($id);
         $item->delete();
-        return redirect()->route('dashbord')->with('alert-info', 'item deleted successfully');
+        return redirect()->back()->with('alert-info', 'item deleted successfully');
     }
 }

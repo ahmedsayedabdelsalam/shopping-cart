@@ -3,7 +3,7 @@
 @section('title', 'Edit Item')
 
 @section('content')
-
+@include('partials.message')
 <div class="box box-primary">
     <div class="box-header with-border">
         <h3 class="box-title">Edit Item: <strong>{{ $product->title }}</strong></h3>

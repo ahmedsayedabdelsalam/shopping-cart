@@ -3,7 +3,7 @@
 @section('title', 'Product Details')
 
 @section('content')
-
+@include('partials.message')
     <!-- small box -->
     <div class="small-box bg-aqua" style="overflow:hidden;position:relative">
       {{-- <img src="{{ asset('storage/product_images/' . $product->imagePath) }}" alt="product pic" style="position:absolute;z-index:0"> --}}

@@ -3,6 +3,7 @@
 @section('title', 'Products')
 
 @section('content')
+@include('partials.message')
 @foreach($products as $product)
 <div class="col-lg-3 col-xs-6">
     <!-- small box -->
@@ -19,6 +20,11 @@
       <a href="/admin/items/{{ $product->id }}" class="small-box-footer">
         More info <i class="fa fa-arrow-circle-right"></i>
       </a>
+      <form action="/admin/items/{{ $product->id }}" method="POST" class="small-box-footer">
+        {{ csrf_field() }}
+        {{ method_field('DELETE') }}
+        <button type="submit" class="btn btn-danger">Delete Product</button>
+      </form>
     </div>
 </div>
 @endforeach

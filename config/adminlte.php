@@ -115,6 +115,11 @@ return [
             'can'  => 'manage-blog',
         ],
         [
+            'text'    => 'Home',
+            'icon'    => 'home',
+            'url'     =>'/',
+        ],
+        [
             'text'    => 'Products',
             'icon'    => 'file',
             'submenu' => [
