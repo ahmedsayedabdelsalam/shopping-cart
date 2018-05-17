@@ -34,9 +34,7 @@ Route::get('reduce/{id}', 'ProductsController@reduceItem');
 Route::get('remove/{id}', 'ProductsController@removeItem');
 
 
-Route::get('admin/dashbord', 'AdminController@index')->name('dashbord')->middleware('auth', 'admin');
-
-
-Route::resource('item', "ItemsController");
-
-
+Route::middleware('auth', 'admin')->prefix('admin')->group(function() {
+    Route::get('dashbord', 'AdminController@index')->name('dashbord');
+    Route::resource('items', "ItemsController");
+});

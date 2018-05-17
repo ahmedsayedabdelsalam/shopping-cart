@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Product;
 
+use Illuminate\Support\Facades\Storage;
+
+
 class ItemsController extends Controller
 {
     /**
@@ -15,7 +18,8 @@ class ItemsController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::all();
+        return view('admin.items.items', compact('products'));
     }
 
     /**
@@ -42,24 +46,22 @@ class ItemsController extends Controller
             'title' => 'required',
             'description' => 'required|max:300',
             'price' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $image = $request->file('image');
-    
-        $filename = time().'.'.$image->getClientOriginalExtension();
-    
-        $destinationPath = public_path('/storage/product_images');
-    
-        $image->move($destinationPath, $filename);
+        if($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = time().'.'.$image->getClientOriginalExtension();
+            $image->storeAs('public/product_images', $filename);
+            $item->imagePath = $filename;
+        }
     
         $item->title = $request['title'];
         $item->description = $request['description'];
         $item->price = $request['price'];
-        $item->imagePath = $filename;
         $item->save();
 
-        return redirect()->route('dashbord')->with('alert-info', 'item has created successfully');
+        return redirect()->route('dashbord')->with('alert-info', 'item created successfully');
     }
 
     /**
@@ -70,7 +72,8 @@ class ItemsController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = Product::find($id);
+        return view('admin.items.item', compact('product'));
     }
 
     /**
@@ -81,7 +84,8 @@ class ItemsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        return view('admin.items.edit-item', compact('product'));
     }
 
     /**
@@ -93,7 +97,31 @@ class ItemsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $item= Product::find($id);
+        $oldImagePath = 'public/product_images/' . $item->imagePath;
+
+        $this->validate($request, [
+            'title' => 'required',
+            'description' => 'required|max:300',
+            'price' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        if($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = time().'.'.$image->getClientOriginalExtension();
+            $image->storeAs('public/product_images', $filename);
+            Storage::delete($oldImagePath);
+            $item->imagePath = $filename;
+        }
+    
+        $item->title = $request['title'];
+        $item->description = $request['description'];
+        $item->price = $request['price'];
+        $item->save();
+
+        return redirect()->route('dashbord')->with('alert-info', 'item edited successfully');
+
     }
 
     /**
@@ -104,6 +132,8 @@ class ItemsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Product::find($id);
+        $item->delete();
+        return redirect()->route('dashbord')->with('alert-info', 'item deleted successfully');
     }
 }

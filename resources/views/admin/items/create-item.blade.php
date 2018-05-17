@@ -10,7 +10,7 @@
     </div>
     <!-- /.box-header -->
     <!-- form start -->
-    <form role="form" action="/item" method="POST" enctype='multipart/form-data'>
+    <form role="form" action="/admin/items" method="POST" enctype='multipart/form-data'>
         {{ csrf_field() }}
         <div class="box-body">
         <div class="form-group">
