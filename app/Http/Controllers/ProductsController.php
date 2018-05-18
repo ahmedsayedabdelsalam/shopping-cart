@@ -12,11 +12,18 @@ use Stripe\Charge;
 use League\Flysystem\Exception;
 use App\Order;
 use Auth;
+use App\Category;
 
 class ProductsController extends Controller
 {
     public function index() {
         $products = Product::all();
+        return view('shopping-cart.index', compact('products'));
+    }
+
+    public function category($id) {
+        $category = Category::find($id);
+        $products = $category->products;
         return view('shopping-cart.index', compact('products'));
     }
 

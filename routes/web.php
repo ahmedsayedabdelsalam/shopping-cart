@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'ProductsController@index')->name('home');
+Route::get('category/{id}', 'ProductsController@category');
 
 Route::middleware('auth')->group(function() {
     Route::get('/user/profile', 'UsersController@profile')->name('profile');
@@ -37,4 +38,5 @@ Route::get('remove/{id}', 'ProductsController@removeItem');
 Route::middleware('auth', 'admin')->prefix('admin')->group(function() {
     Route::get('dashbord', 'AdminController@index')->name('dashbord');
     Route::resource('items', "ItemsController");
+    Route::resource('categories', "CategoriesController");
 });

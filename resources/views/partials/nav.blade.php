@@ -7,24 +7,32 @@
 
     <div class="collapse navbar-collapse" id="navbarsExample07">
         <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-            <a class="nav-link" href="/shopping-cart"><i class="fas fa-shopping-cart"></i> Shopping Cart <span class="badge">{{ Session::get('cart')->totalQty ?? 0 }}</span><span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i> User Management</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown07">
-            @if(Auth::check())
-                <a class="dropdown-item" href="/user/profile">Profile</a>
-                @if(in_array('admin', \App\User::find(Auth::id())->roles->pluck('name')->toArray()))
-                    <a class="dropdown-item" href="/admin/dashbord">Admin Panel</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-tag"></i> Categories</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown07">
+                    @foreach(\App\Category::all() as $category)
+                    <a class="dropdown-item" href="/category/{{ $category->id }}">{{ $category->title }}</a>
+                    @endforeach
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/shopping-cart"><i class="fas fa-shopping-cart"></i> Shopping Cart <span class="badge">{{ Session::get('cart')->totalQty ?? 0 }}</span><span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i> User Management</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown07">
+                @if(Auth::check())
+                    <a class="dropdown-item" href="/user/profile">Profile</a>
+                    @if(in_array('admin', \App\User::find(Auth::id())->roles->pluck('name')->toArray()))
+                        <a class="dropdown-item" href="/admin/dashbord">Admin Panel</a>
+                    @endif
+                    <a class="dropdown-item" href="/logout">Logout</a>
+                @else
+                    <a class="dropdown-item" href="/register">Signup</a>
+                    <a class="dropdown-item" href="/signin">Signin</a>
                 @endif
-                <a class="dropdown-item" href="/logout">Logout</a>
-            @else
-                <a class="dropdown-item" href="/register">Signup</a>
-                <a class="dropdown-item" href="/signin">Signin</a>
-            @endif
-            </div>
-        </li>
+                </div>
+            </li>
         </ul>
     </div>
     </div>

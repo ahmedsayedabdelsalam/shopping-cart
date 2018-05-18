@@ -39,8 +39,7 @@ class ItemsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        
+    {        
         $item = new Product();
         $this->validate($request, [
             'title' => 'required',
@@ -60,6 +59,10 @@ class ItemsController extends Controller
         $item->description = $request['description'];
         $item->price = $request['price'];
         $item->save();
+        
+        $item->categories()->syncWithoutDetaching($request['cats']);
+
+
 
         return redirect()->back()->with('alert-info', 'item created successfully');
     }
@@ -98,7 +101,6 @@ class ItemsController extends Controller
     public function update(Request $request, $id)
     {
         $item= Product::find($id);
-        $oldImagePath = 'public/product_images/' . $item->imagePath;
 
         $this->validate($request, [
             'title' => 'required',
@@ -108,10 +110,13 @@ class ItemsController extends Controller
         ]);
 
         if($request->hasFile('image')) {
+            if($item->imagePath != 'default.jpg') {
+                $oldImagePath = 'public/product_images/' . $item->imagePath;
+                Storage::delete($oldImagePath);
+            }
             $image = $request->file('image');
             $filename = time().'.'.$image->getClientOriginalExtension();
             $image->storeAs('public/product_images', $filename);
-            Storage::delete($oldImagePath);
             $item->imagePath = $filename;
         }
     
@@ -133,6 +138,10 @@ class ItemsController extends Controller
     public function destroy($id)
     {
         $item = Product::find($id);
+        if($item->imagePath != 'default.jpg') {
+            $oldImagePath = 'public/product_images/' . $item->imagePath;
+            Storage::delete($oldImagePath);
+        }
         $item->delete();
         return redirect()->back()->with('alert-info', 'item deleted successfully');
     }
