@@ -41,5 +41,6 @@ Route::middleware('auth', 'admin')->prefix('admin')->group(function() {
     Route::resource('categories', "CategoriesController");
     Route::prefix('reports')->group(function() {
         Route::get('products', 'ReportsController@getProductsReports');
+        Route::get('users', 'ReportsController@getUsersReports');
     });
 });

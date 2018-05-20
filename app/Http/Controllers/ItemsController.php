@@ -75,7 +75,7 @@ class ItemsController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
         return view('admin.items.item', compact('product'));
     }
 
@@ -87,7 +87,7 @@ class ItemsController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
         return view('admin.items.edit-item', compact('product'));
     }
 
