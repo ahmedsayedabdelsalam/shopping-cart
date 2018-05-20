@@ -39,4 +39,7 @@ Route::middleware('auth', 'admin')->prefix('admin')->group(function() {
     Route::get('dashbord', 'AdminController@index')->name('dashbord');
     Route::resource('items', "ItemsController");
     Route::resource('categories', "CategoriesController");
+    Route::prefix('reports')->group(function() {
+        Route::get('products', 'ReportsController@getProductsReports');
+    });
 });

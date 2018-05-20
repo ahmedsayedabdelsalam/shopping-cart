@@ -134,6 +134,20 @@ return [
 
             ],
         ],
+        [
+            'text'    => 'Reports',
+            'icon'    => 'file',
+            'submenu' => [
+                [
+                    'text' => 'Products',
+                    'url'  => 'admin/reports/products',
+                ],
+                [
+                    'text' => 'Users',
+                    'url'  => 'admin/reports/users',
+                ],
+            ],
+        ],
     ],
 
     /*
