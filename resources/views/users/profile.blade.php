@@ -14,12 +14,6 @@
                 <li>
                     <span>{{ $item['item']['title'] }}</span>
                     <span class="badge badge-success">{{ $item['price'] }}</span>
-                    <span class="badge badge-primary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Reduce by 1</a>
-                        <a class="dropdown-item" href="#">Reduce All</a>
-                        </div>
-                    </span>
                     <span class="badge float-right">{{ $item['qty'] }}</span>
                 </li>
                 @endforeach
