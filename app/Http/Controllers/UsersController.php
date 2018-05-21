@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Session;
 
 use App\User;
 use Auth;
+use App\Events\UserCreatedEvent;
 
 
 class UsersController extends Controller
@@ -26,6 +27,7 @@ class UsersController extends Controller
         ]);
         $user->save();
         Auth::login($user);
+        event(new UserCreatedEvent($user));
         return redirect()->route('profile');
     }
 
