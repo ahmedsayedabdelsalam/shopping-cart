@@ -13,6 +13,7 @@ use League\Flysystem\Exception;
 use App\Order;
 use Auth;
 use App\Category;
+use App\Events\OrderPurchasedEvent;
 
 class ProductsController extends Controller
 {
@@ -50,7 +51,7 @@ class ProductsController extends Controller
 
         $request->session()->put('cart', $cart);
 
-        return redirect()->route('home');
+        return redirect()->back();
     }
 
     public function reduceItem($id) {
@@ -109,6 +110,7 @@ class ProductsController extends Controller
                 $order->payment_id = $charge->id;
                 $order->cart = serialize(Session::get('cart'));
                 $order->save();
+                event(new OrderPurchasedEvent($order));
             } catch(Exception $e) {
                 return redirect()->back()->with('error', $e->getMessage);
             }

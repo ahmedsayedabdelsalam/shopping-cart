@@ -8,6 +8,6 @@ use App\User;
 class Order extends Model
 {
     public function user() {
-        return $this->belongTo(User::calss);
+        return $this->belongsTo(User::class);
     }
 }
