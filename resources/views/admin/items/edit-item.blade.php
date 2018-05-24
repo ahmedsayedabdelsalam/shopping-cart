@@ -31,6 +31,13 @@
             <input name="image" type="file" id="image">
         </div>
 
+        <label for="select">((select Categories)) Mutiple select list (hold shift to select more than one):</label>
+        <select multiple name="cats[ ]" class="form-control" id="select">
+            @foreach(\App\Category::all() as $category)
+            <option value="{{ $category->id }}">{{ $category->title }}</option>
+            @endforeach
+        </select>
+
         <div class="box-footer">
             <button type="submit" class="btn btn-primary">Edit Item</button>
         </div>
