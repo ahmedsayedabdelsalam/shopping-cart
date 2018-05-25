@@ -39,7 +39,6 @@ class OrderController extends Controller
     public function store(Request $request, $id)
     {
         // OrderApi::firstOrCreate(['user_id' => 3], ['product_id' => $id], ['count' => 1]);
-        $order = OrderApi::
     }
 
     /**

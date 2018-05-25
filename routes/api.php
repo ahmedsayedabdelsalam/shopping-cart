@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('register', 'API\AuthController@register');
 Route::post('login', 'API\AuthController@login');
 Route::apiResource('/products','API\ProductController');
-Route::get('/profile','API\AuthController');
+Route::get('/profile','API\AuthController@profile');
 Route::group(['prefix' => 'products'], function() {
     Route::apiResource('/{id}/cart','API\OrderController');
 });
