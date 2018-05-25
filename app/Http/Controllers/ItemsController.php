@@ -18,7 +18,7 @@ class ItemsController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::paginate(12);
         return view('admin.items.items', compact('products'));
     }
 

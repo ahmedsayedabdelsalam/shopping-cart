@@ -18,12 +18,12 @@ use App\Events\OrderPurchasedEvent;
 class ProductsController extends Controller
 {
     public function index() {
-        $products = Product::with('categories')->get();
+        $products = Product::with('categories')->paginate(9);
         return view('shopping-cart.index', compact('products'));
     }
 
     public function category($id) {
-        $products = Category::find($id)->products;
+        $products = Category::find($id)->products()->paginate(9);
         return view('shopping-cart.index', compact('products'));
     }
 

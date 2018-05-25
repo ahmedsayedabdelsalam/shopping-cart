@@ -1,10 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\User;
 
-use App\Product;
-
-class ProductsTableSeeder extends Seeder
+class UsersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +12,6 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Product::class, 20)->create();
+        factory(User::class, 5)->create();
     }
 }
