@@ -19,7 +19,8 @@ class ProductResource extends JsonResource
             "imagePath" => $this->imagePath,
             "title" => $this->title,
             "description" => $this->description,
-            "price" => $this->price
+            "price" => $this->price,
+            "categories" =>  CategoryResource::collection($this->categories)
         ];
     }
 }
