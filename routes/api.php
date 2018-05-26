@@ -28,4 +28,5 @@ Route::group(['prefix' => 'products'], function() {
     Route::post('/{id}/addItem','API\OrderController@addItem');
     Route::delete('/{id}/removeItem','API\OrderController@removeItem');
     Route::post('/removeAll','API\OrderController@removeAll');
+    Route::post('/checkout','API\OrderController@checkout');
 });
