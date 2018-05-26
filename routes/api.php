@@ -20,8 +20,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('register', 'API\AuthController@register');
 Route::post('login', 'API\AuthController@login');
 Route::post('logout', 'API\AuthController@logout');
-Route::apiResource('/products','API\ProductController');
+Route::get('users', 'API\AuthController@users');
+Route::get('roles', 'API\AuthController@roles');
 Route::get('/profile','API\AuthController@profile');
+Route::apiResource('/products','API\ProductController');
 Route::group(['prefix' => 'products'], function() {
-    Route::apiResource('/{id}/cart','API\OrderController');
+    Route::post('/{id}/addItem','API\OrderController@addItem');
+    Route::delete('/{id}/removeItem','API\OrderController@removeItem');
+    Route::post('/removeAll','API\OrderController@removeAll');
 });

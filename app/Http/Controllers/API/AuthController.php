@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use Auth;
+use App\Http\Resources\ProfileResource;
+use App\Http\Resources\UsersResource;
+use App\Http\Resources\RolesResource;
+use App\Role;
 
 class AuthController extends Controller
 {
@@ -16,7 +20,7 @@ class AuthController extends Controller
    */
   public function __construct()
   {
-    $this->middleware('auth:api', ['except' => ['login', 'register']]);
+    $this->middleware('auth:api', ['except' => ['login', 'register', 'users']]);
   }
 
   public function register(Request $request)
@@ -89,7 +93,8 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function profile() {
-      return response()->json(auth()->user());
+    //   return response()->json(auth()->user());
+      return new ProfileResource(auth()->user());
     }
 
      /**
@@ -102,5 +107,14 @@ class AuthController extends Controller
         return $this->respondWithToken(auth()->refresh());
     }
 
+    public function users() {
+        $users = User::all();
+        return UsersResource::collection($users);
+    }
+
+    public function roles() {
+        $roles = Role::all();
+        return RolesResource::collection($roles);
+    }
    
 }
