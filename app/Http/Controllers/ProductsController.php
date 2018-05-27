@@ -110,6 +110,7 @@ class ProductsController extends Controller
                 $order->payment_id = $charge->id;
                 $order->cart = serialize(Session::get('cart'));
                 $order->save();
+                
                 event(new OrderPurchasedEvent($order));
             } catch(Exception $e) {
                 return redirect()->back()->with('error', $e->getMessage);

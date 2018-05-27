@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Stripe\Product;
 use App\OrderApi;
 use Auth;
 use App\Order;
@@ -59,7 +58,7 @@ class OrderController extends Controller
     }
 
     public function checkout(Request $request) {
-
+        
         $orders = OrderApi::where('user_id', auth()->user()->id)->with('product')->get();
 
         $cart = new Cart(null);
