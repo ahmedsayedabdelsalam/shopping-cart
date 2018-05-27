@@ -8,6 +8,7 @@ use Stripe\Product;
 use App\OrderApi;
 use Auth;
 use App\Order;
+use App\Cart;
 
 class OrderController extends Controller
 {
@@ -60,30 +61,33 @@ class OrderController extends Controller
     public function checkout(Request $request) {
 
         $orders = OrderApi::where('user_id', auth()->user()->id)->with('product')->get();
-        $items = [];
+
+        $cart = new Cart(null);
+
         foreach($orders as $order) {
-            $items['items'][$order->product->id]['item'] = $order->product;
-            $items['items'][$order->product->id]['qty'] = $order->count;
-            $items['items'][$order->product->id]['price'] = $order->product->price * $order->count;
+            $cart->items[$order->product->id]['item'] = $order->product;
+            $cart->items[$order->product->id]['qty'] = $order->count;
+            $cart->items[$order->product->id]['price'] = $order->product->price * $order->count;
+            $cart->totalQty += $cart->items[$order->product->id]['qty'];
+            $cart->totalPrice += $cart->items[$order->product->id]['price'];
         }
-        $itemss = array_map(function ($val) {
-            $items['totalQty'] += $val['qty'];
-            $items['totalPrice'] += $val['price'];
-        }, $items['items']);
 
         $this->validate($request, [
             'name' => 'required',
             'address' => 'required',
             'payment_id' => 'required'
         ]);
+        
         $order = new Order([
             'name' => $request->input('name'),
             'address' => $request->input('address'),
             'payment_id' => $request->input('payment_id'),
             'user_id' => auth()->user()->id,
-            'cart' => serialize($itemss)
+            'cart' => serialize($cart)
         ]);
         $order->save();
+
+        return response()->json(['message' => 'items purchased successfully'], 200);
     }
         
 }
