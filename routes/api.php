@@ -23,10 +23,11 @@ Route::post('logout', 'API\AuthController@logout');
 Route::get('users', 'API\AuthController@users');
 Route::get('roles', 'API\AuthController@roles');
 Route::get('/profile','API\AuthController@profile');
-Route::apiResource('/products','API\ProductController');
 Route::group(['prefix' => 'products'], function() {
     Route::post('/{id}/addItem','API\OrderController@addItem');
     Route::delete('/{id}/removeItem','API\OrderController@removeItem');
     Route::post('/removeAll','API\OrderController@removeAll');
+    Route::get('/cart','API\OrderController@cart');
     Route::post('/checkout','API\OrderController@checkout');
 });
+Route::apiResource('/products','API\ProductController');

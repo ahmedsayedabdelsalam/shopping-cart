@@ -11,6 +11,7 @@ use App\Cart;
 use Stripe\Stripe;
 use Stripe\Token;
 use Stripe\Charge;
+use App\Http\Resources\CartResource;
 
 class OrderController extends Controller
 {
@@ -58,6 +59,11 @@ class OrderController extends Controller
         $orders = OrderApi::where('user_id', auth()->user()->id)->get()->each->delete();
 
         return response()->json(["message" => "All items removed successfully"]);
+    }
+
+    public function cart() {
+        $orders = OrderApi::where('user_id', auth()->user()->id)->get();
+        return CartResource::collection($orders);
     }
 
     public function checkout(Request $request) {
