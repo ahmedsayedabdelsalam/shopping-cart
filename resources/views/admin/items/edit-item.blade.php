@@ -34,7 +34,7 @@
         <label for="select">((select Categories)) Mutiple select list (hold shift to select more than one):</label>
         <select multiple name="cats[ ]" class="form-control" id="select">
             @foreach(\App\Category::all() as $category)
-            <option value="{{ $category->id }}">{{ $category->title }}</option>
+            <option <?php echo in_array($category->id, $product->categories->pluck('id')->toArray()) ? "selected" : "77" ?> value="{{ $category->id }}">{{ $category->title }}</option>
             @endforeach
         </select>
 

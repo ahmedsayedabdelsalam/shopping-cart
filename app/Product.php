@@ -9,6 +9,6 @@ class Product extends Model
 {
     protected $fillable = ['imagePath', 'title', 'description', 'price'];
     public function categories() {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class)->withTimestamps();
     }
 }

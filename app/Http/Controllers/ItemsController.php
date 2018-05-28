@@ -60,7 +60,7 @@ class ItemsController extends Controller
         $item->price = $request['price'];
         $item->save();
         
-        $item->categories()->syncWithoutDetaching($request['cats']);
+        $item->categories()->sync($request['cats']);
 
 
 
@@ -124,6 +124,8 @@ class ItemsController extends Controller
         $item->description = $request['description'];
         $item->price = $request['price'];
         $item->save();
+
+        $item->categories()->sync($request['cats']);
 
         return redirect()->back()->with('alert-info', 'item edited successfully');
 
