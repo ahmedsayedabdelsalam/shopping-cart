@@ -18,7 +18,7 @@ class ProductCollection extends JsonResource
     {
         return [
             "id" => $this->id,
-            "imagePath" => URL::to('/') . '/storage/product_images/' . $this->imagePath,
+            "imagePath" => asset('storage/product_images/'. $this->imagePath),
             "title" => $this->title,
             "price" => $this->price,
             "categories" =>  CategoryResource::collection($this->categories)

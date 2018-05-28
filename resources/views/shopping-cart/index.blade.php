@@ -31,6 +31,6 @@
         </div>
       @endforeach
     </div>
-    @endforeach
-    {{ $products->links() }}
+  @endforeach
+  {{ $products->links() }}
 @endsection
