@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\URL;
 
 class ProductResource extends JsonResource
 {
@@ -16,7 +17,7 @@ class ProductResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "imagePath" => $this->imagePath,
+            "imagePath" => URL::to('/') . '/storage/product_images/' . $this->imagePath,
             "title" => $this->title,
             "description" => $this->description,
             "price" => $this->price,

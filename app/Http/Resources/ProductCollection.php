@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\CategoryResource;
+use Illuminate\Support\Facades\URL;
 
 class ProductCollection extends JsonResource
 {
@@ -17,7 +18,7 @@ class ProductCollection extends JsonResource
     {
         return [
             "id" => $this->id,
-            "imagePath" => $this->imagePath,
+            "imagePath" => URL::to('/') . '/storage/product_images/' . $this->imagePath,
             "title" => $this->title,
             "price" => $this->price,
             "categories" =>  CategoryResource::collection($this->categories)
