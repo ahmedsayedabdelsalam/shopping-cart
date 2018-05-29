@@ -37,6 +37,13 @@
             @endforeach
         </select>
 
+        <label for="select1">((select family)) :</label>
+        <select name="family" class="form-control" id="select1">
+            @foreach(\App\Family::all() as $family)
+            <option value="{{ $family->id }}">{{ $family->title }}</option>
+            @endforeach
+        </select>
+
         <div class="box-footer">
             <button type="submit" class="btn btn-primary">Add Item</button>
         </div>

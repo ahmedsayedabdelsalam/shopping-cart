@@ -34,7 +34,15 @@
         <label for="select">((select Categories)) Mutiple select list (hold shift to select more than one):</label>
         <select multiple name="cats[ ]" class="form-control" id="select">
             @foreach(\App\Category::all() as $category)
-            <option <?php echo in_array($category->id, $product->categories->pluck('id')->toArray()) ? "selected" : "77" ?> value="{{ $category->id }}">{{ $category->title }}</option>
+            <option <?php echo in_array($category->id, $product->categories->pluck('id')->toArray()) ? "selected" : "" ?> value="{{ $category->id }}">{{ $category->title }}</option>
+            @endforeach
+        </select>
+
+        <br>
+        <label for="select1">((select Family)) :</label>
+        <select name="family" class="form-control" id="select1">
+            @foreach(\App\Family::all() as $family)
+            <option <?php echo $family->id == $product->family_id ? "selected" : "" ?> value="{{ $family->id }}">{{ $family->title }}</option>
             @endforeach
         </select>
 

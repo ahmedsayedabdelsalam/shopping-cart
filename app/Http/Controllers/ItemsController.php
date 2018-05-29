@@ -58,6 +58,7 @@ class ItemsController extends Controller
         $item->title = $request['title'];
         $item->description = $request['description'];
         $item->price = $request['price'];
+        $item->family_id = $request['family'];
         $item->save();
         
         $item->categories()->sync($request['cats']);
@@ -123,6 +124,7 @@ class ItemsController extends Controller
         $item->title = $request['title'];
         $item->description = $request['description'];
         $item->price = $request['price'];
+        $item->family_id = $request['family'];
         $item->save();
 
         $item->categories()->sync($request['cats']);
