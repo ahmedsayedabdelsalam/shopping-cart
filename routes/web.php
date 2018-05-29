@@ -46,3 +46,9 @@ Route::middleware('auth', 'admin')->prefix('admin')->group(function() {
         Route::get('users', 'ReportsController@getUsersReports');
     });
 });
+
+
+Route::get('lang/{lang}', function($lang) {
+    App::setLocale($lang);
+    return __('message', ['name' => 'ahmed']);
+});
