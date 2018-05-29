@@ -26,6 +26,7 @@
                 </ul> --}}
                 <div class="clearfix"></div>
                 <div><i class="fas fa-tag"></i> {{ implode(", ", $product->categories->pluck('title')->toArray()) }}</div>
+                <div><i class="fas fa-box-open"></i> <a href="/family/{{ $product->family->slug }}">{{ $product->family->title }}</a></div>
               </div>
           </div>
         </div>

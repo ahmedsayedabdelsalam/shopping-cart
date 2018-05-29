@@ -14,11 +14,12 @@ use App\Order;
 use Auth;
 use App\Category;
 use App\Events\OrderPurchasedEvent;
+use App\Family;
 
 class ProductsController extends Controller
 {
     public function index() {
-        $products = Product::with('categories')->paginate(9);
+        $products = Product::with('categories', 'family')->paginate(9);
         return view('shopping-cart.index', compact('products'));
     }
 
@@ -28,7 +29,12 @@ class ProductsController extends Controller
     }
 
     public function category(Request $request, Category $category) {
-        $products = $category->products()->paginate(9);
+        $products = $category->products()->with('categories','family')->paginate(9);
+        return view('shopping-cart.index', compact('products'));
+    }
+
+    public function family(Request $request, Family $family) {
+        $products = $family->products()->with('categories','family')->paginate(9);
         return view('shopping-cart.index', compact('products'));
     }
 

@@ -22,7 +22,8 @@ class ProductCollection extends JsonResource
             "imagePath" => asset('storage/product_images/'. $this->imagePath),
             "title" => $this->title,
             "price" => $this->price,
-            "categories" =>  CategoryResource::collection($this->categories)
+            "categories" =>  CategoryResource::collection($this->categories),
+            "family" =>  new FamilyResource($this->family)
         ];
     }
 }

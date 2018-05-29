@@ -40,24 +40,53 @@
     //     }
     //  
 
-    $productsRec = \App\Services\Services::recommendedProducts($allItems);
+    $productsRec = \App\Services\Services::recommendedProducts('category', $allItems);
 ?>
+<hr>
+<h3 class="text-center">items in same category</h3>
 <div class="row">
     @foreach($productsRec as $productRec)
     <div class=" col-lg-4">
         <div class="card mt-3">
             <img class="card-img-top" src="{{ asset('storage/product_images/' . $productRec->imagePath) }}" alt="Card image cap">
             <div class="card-body">
-                <h5 class="card-title">{{ $productRec->title }}</h5>
+                <h5 class="card-title"><a href="/products/{{ $productRec->slug }}">{{ $productRec->title }}</a></h5>
                 <p class="card-text">{{ $productRec->description }}</p>
                 <strong>{{ $productRec->price }}$</strong>
                 <a href="/shopping-cart/{{ $productRec->id }}" class="btn btn-success float-right">Add to Cart</a>
                 <div class="clearfix"></div>
                 <div><i class="fas fa-tag"></i> {{ implode(", ", $productRec->categories->pluck('title')->toArray()) }}</div>
+                <div><i class="fas fa-box-open"></i> <a href="/family/{{ $productRec->family->slug }}">{{ $productRec->family->title }}</a></div>
             </div>
         </div>
     </div>
     @endforeach
 </div>
 {{ $productsRec->links() }}
+
+
+<hr>
+
+<?php
+    $productsRec = \App\Services\Services::recommendedProducts('family', $allItems);
+?>
+<h3 class="text-center">items in same family</h3>
+<div class="row bg-dark">
+    @foreach($productsRec as $productRec)
+    <div class=" col-lg-4">
+        <div class="card mt-3">
+            <img class="card-img-top" src="{{ asset('storage/product_images/' . $productRec->imagePath) }}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title"><a href="/products/{{ $productRec->slug }}">{{ $productRec->title }}</a></h5>
+                <p class="card-text">{{ $productRec->description }}</p>
+                <strong>{{ $productRec->price }}$</strong>
+                <a href="/shopping-cart/{{ $productRec->id }}" class="btn btn-success float-right">Add to Cart</a>
+                <div class="clearfix"></div>
+                <div><i class="fas fa-tag"></i> {{ implode(", ", $productRec->categories->pluck('title')->toArray()) }}</div>
+                <div><i class="fas fa-box-open"></i> <a href="/family/{{ $productRec->family->slug }}">{{ $productRec->family->title }}</a></div>
+            </div>
+        </div>
+    </div>
+    @endforeach
+</div>
 @endsection

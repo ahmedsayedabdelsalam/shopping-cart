@@ -14,6 +14,7 @@
 Route::get('/', 'ProductsController@index')->name('home');
 Route::get('products/{product}', 'ProductsController@show');
 Route::get('category/{category}', 'ProductsController@category');
+Route::get('family/{family}', 'ProductsController@family');
 
 Route::middleware('auth')->group(function() {
     Route::get('/user/profile', 'UsersController@profile')->name('profile');

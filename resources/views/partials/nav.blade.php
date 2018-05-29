@@ -8,6 +8,14 @@
     <div class="collapse navbar-collapse" id="navbarsExample07">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-box-open"></i> Families</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown07">
+                    @foreach(\App\Family::all() as $family)
+                    <a class="dropdown-item" href="/family/{{ $family->slug }}">{{ $family->title }}</a>
+                    @endforeach
+                </div>
+            </li>
+            <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-tag"></i> Categories</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown07">
                     @foreach(\App\Category::all() as $category)

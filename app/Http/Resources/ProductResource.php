@@ -22,7 +22,8 @@ class ProductResource extends JsonResource
             "title" => $this->title,
             "description" => $this->description,
             "price" => $this->price,
-            "categories" =>  CategoryResource::collection($this->categories)
+            "categories" =>  CategoryResource::collection($this->categories),
+            "family" =>  new FamilyResource($this->family)
         ];
     }
 }

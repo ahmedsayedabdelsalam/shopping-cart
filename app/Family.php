@@ -23,7 +23,7 @@ class Family extends Model
 
     public function products()
     {
-        return $this->hasMnay(Product::class);
+        return $this->hasMany(Product::class);
     }
 
     public function getRouteKeyName()
