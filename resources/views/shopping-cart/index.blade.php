@@ -15,7 +15,7 @@
           <div class="card mt-3">
               <img class="card-img-top" src="{{ asset('storage/product_images/' . $product->imagePath) }}" alt="Card image cap">
               <div class="card-body">
-                <h5 class="card-title">{{ $product->title }}</h5>
+                <h5 class="card-title"><a href="/products/{{ $product->slug }}">{{ $product->title }}</a></h5>
                 <p class="card-text">{{ $product->description }}</p>
                 <strong>{{ $product->price }}$</strong>
                 <a href="/shopping-cart/{{ $product->id }}" class="btn btn-success float-right">Add to Cart</a>

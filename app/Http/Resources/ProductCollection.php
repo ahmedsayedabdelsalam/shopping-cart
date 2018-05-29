@@ -18,6 +18,7 @@ class ProductCollection extends JsonResource
     {
         return [
             "id" => $this->id,
+            "slug" => $this->slug,
             "imagePath" => asset('storage/product_images/'. $this->imagePath),
             "title" => $this->title,
             "price" => $this->price,

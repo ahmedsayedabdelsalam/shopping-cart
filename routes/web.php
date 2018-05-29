@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'ProductsController@index')->name('home');
+Route::get('products/{product}', 'ProductsController@show');
 Route::get('category/{id}', 'ProductsController@category');
 
 Route::middleware('auth')->group(function() {
