@@ -11,7 +11,7 @@
                 <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-tag"></i> Categories</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown07">
                     @foreach(\App\Category::all() as $category)
-                    <a class="dropdown-item" href="/category/{{ $category->id }}">{{ $category->title }}</a>
+                    <a class="dropdown-item" href="/category/{{ $category->slug }}">{{ $category->title }}</a>
                     @endforeach
                 </div>
             </li>

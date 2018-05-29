@@ -27,8 +27,8 @@ class ProductsController extends Controller
         return view('shopping-cart.product', compact('product'));
     }
 
-    public function category($id) {
-        $products = Category::find($id)->products()->paginate(9);
+    public function category(Request $request, Category $category) {
+        $products = $category->products()->paginate(9);
         return view('shopping-cart.index', compact('products'));
     }
 

@@ -16,6 +16,9 @@ class CategoriesProductsTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET foreign_key_checks=0');
+        DB::table('category_product')->truncate();
+
         for($i=0; $i<40; $i++) {
             DB::table('category_product')->insert([
                 "category_id" => Category::get()->random()->id,
@@ -24,5 +27,7 @@ class CategoriesProductsTableSeeder extends Seeder
                 "updated_at" => Carbon::now()->subHours(rand(0, 9999))  
             ]);
         }
+
+        DB::statement('SET foreign_key_checks=1');
     }
 }

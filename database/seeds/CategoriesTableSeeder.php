@@ -12,6 +12,9 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET foreign_key_checks=0');
+        Category::truncate();
         factory(Category::class, 10)->create();
+        DB::statement('SET foreign_key_checks=1');
     }
 }
