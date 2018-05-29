@@ -1,6 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
+use App\Family;
 
 $factory->define(App\Product::class, function (Faker $faker) {
     return [
@@ -8,5 +9,6 @@ $factory->define(App\Product::class, function (Faker $faker) {
         "title" => $faker->sentence($nbWords = 3, $variableNbWords = true),
         "description" => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
         "price" => $faker->numberBetween($min = 1000, $max = 9000),
+        'family_id' => Family::get()->random()->id,
     ];
 });

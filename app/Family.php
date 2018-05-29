@@ -3,18 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Category;
+use App\Product;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
-use App\Family;
 
-class Product extends Model
+class Family extends Model
 {
     use HasSlug;
-
-    protected $fillable = ['imagePath', 'title', 'description', 'price'];
-
-    
     /**
      * Get the options for generating the slug.
      */
@@ -26,18 +21,13 @@ class Product extends Model
             ->slugsShouldBeNoLongerThan(50);
     }
 
-    public function categories() {
-        return $this->belongsToMany(Category::class)->withTimestamps();
+    public function products()
+    {
+        return $this->hasMnay(Product::class);
     }
 
     public function getRouteKeyName()
     {
         return 'slug';
     }
-
-    public function family()
-    {
-        return $this->belongsTo(Family::class);
-    }
-    
 }
