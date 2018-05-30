@@ -5,7 +5,7 @@
 @section('content')
 <div class="register mt-3 col-md-4 offset-md-4">
     <h1>Sign Up</h1>
-    <form action="/register" method="POST">
+    <form action="/{{App::getLocale()}}/{{App::getLocale()}}/register" method="POST">
         {{ csrf_field() }}
         <div class="form-group">
             <label for="Email">Email address</label>
@@ -15,7 +15,7 @@
             <label for="Password">Password</label>
             <input type="password" name="password" class="form-control" id="Password" placeholder="Password">
         </div>
-        <input type="submit" class="btn btn-primary" value="register">
+        <input type="submit" class="btn btn-primary" value="{{ __('main.signup') }}">
     </form>
 </div>
 @endsection

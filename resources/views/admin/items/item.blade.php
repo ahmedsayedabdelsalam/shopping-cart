@@ -19,7 +19,7 @@
       <a href="/admin/items/{{ $product->id }}/edit" class="small-box-footer">
         Edit Item <i class="fa fa-arrow-circle-right"></i>
       </a>
-      <form action="/admin/items/{{ $product->id }}" method="POST" class="small-box-footer">
+      <form action="/{{App::getLocale()}}/admin/items/{{ $product->id }}" method="POST" class="small-box-footer">
         {{ csrf_field() }}
         {{ method_field('DELETE') }}
         <button type="submit" class="btn btn-danger">Delete Product</button>

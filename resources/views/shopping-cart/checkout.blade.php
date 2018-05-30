@@ -6,7 +6,7 @@
 <div class="register mt-3 col-md-4 offset-md-4">
     <h1>Check Out</h1>
     <h3>Your Total : <strong>{{ $totalPrice ?? 0 }}</strong></h3>
-    <form action="/checkout" method="POST" id="payment-form">
+    <form action="/{{App::getLocale()}}/checkout" method="POST" id="payment-form">
         <div id="charge-error" class="alert alert-danger {{ !Session::has('error') ? 'd-none' : '' }}">{{ Session::get('error') }}</div>
         {{ csrf_field() }}
        

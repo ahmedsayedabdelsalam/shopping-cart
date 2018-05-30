@@ -5,7 +5,7 @@
 @section('content')
 @include('partials.message')
 <div class="register mt-3 col-md-4 offset-md-4">
-    <h1>Sign In</h1>
+    <h1>{{ __('main.signin') }}</h1>
     <form action="/signin" method="POST">
         {{ csrf_field() }}
         <div class="form-group">
@@ -16,8 +16,8 @@
             <label for="Password">Password</label>
             <input type="password" name="password" class="form-control" id="Password" placeholder="Password">
         </div>
-        <input type="submit" class="btn btn-primary" value="sign in">
+        <input type="submit" class="btn btn-primary" value="{{ __('main.signin') }}">
     </form>
-    <p>don't have account ? sign up now <a href="/register">Sing Up</a></p>
+    <p>don't have account ? sign up now <a href="/register">{{ __('main.signup') }}</a></p>
 </div>
 @endsection

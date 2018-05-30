@@ -11,44 +11,47 @@
 |
 */
 
-Route::get('/', 'ProductsController@index')->name('home');
-Route::get('products/{product}', 'ProductsController@show');
-Route::get('category/{category}', 'ProductsController@category');
-Route::get('family/{family}', 'ProductsController@family');
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ],
+    function()
+    {
+    Route::get('/', 'ProductsController@index')->name('home');
+    Route::get('products/{product}', 'ProductsController@show');
+    Route::get('category/{category}', 'ProductsController@category');
+    Route::get('family/{family}', 'ProductsController@family');
 
-Route::middleware('auth')->group(function() {
-    Route::get('/user/profile', 'UsersController@profile')->name('profile');
-    Route::get('/logout', 'UsersController@logout');
+    Route::middleware('auth')->group(function() {
+        Route::get('/user/profile', 'UsersController@profile')->name('profile');
+        Route::get('/logout', 'UsersController@logout');
 
-    Route::get('checkout', 'ProductsController@checkoutView');
-    Route::post('checkout', 'ProductsController@checkout');
-});
-
-Route::middleware('guest')->group(function() {
-    Route::get('/register', 'UsersController@registerForm');
-    Route::post('/register', 'UsersController@register');
-    Route::get('/signin', 'UsersController@signinForm')->name('login');
-    Route::post('/signin', 'UsersController@signin');
-});
-
-Route::get('shopping-cart/{id}', 'ProductsController@shoppingCart');
-Route::get('shopping-cart', 'ProductsController@shoppingCartView');
-Route::get('reduce/{id}', 'ProductsController@reduceItem');
-Route::get('remove/{id}', 'ProductsController@removeItem');
-
-
-Route::middleware('auth', 'admin')->prefix('admin')->group(function() {
-    Route::get('dashbord', 'AdminController@index')->name('dashbord');
-    Route::resource('items', "ItemsController");
-    Route::resource('categories', "CategoriesController");
-    Route::prefix('reports')->group(function() {
-        Route::get('products', 'ReportsController@getProductsReports');
-        Route::get('users', 'ReportsController@getUsersReports');
+        Route::get('checkout', 'ProductsController@checkoutView');
+        Route::post('checkout', 'ProductsController@checkout');
     });
-});
+
+    Route::middleware('guest')->group(function() {
+        Route::get('/register', 'UsersController@registerForm');
+        Route::post('/register', 'UsersController@register');
+        Route::get('/signin', 'UsersController@signinForm')->name('login');
+        Route::post('/signin', 'UsersController@signin');
+    });
+
+    Route::get('shopping-cart/{id}', 'ProductsController@shoppingCart');
+    Route::get('shopping-cart', 'ProductsController@shoppingCartView');
+    Route::get('reduce/{id}', 'ProductsController@reduceItem');
+    Route::get('remove/{id}', 'ProductsController@removeItem');
 
 
-Route::get('lang/{lang}', function($lang) {
-    App::setLocale($lang);
-    return __('message', ['name' => 'ahmed']);
+    Route::middleware('auth', 'admin')->prefix('admin')->group(function() {
+        Route::get('dashbord', 'AdminController@index')->name('dashbord');
+        Route::resource('items', "ItemsController");
+        Route::resource('categories', "CategoriesController");
+        Route::prefix('reports')->group(function() {
+            Route::get('products', 'ReportsController@getProductsReports');
+            Route::get('users', 'ReportsController@getUsersReports');
+        });
+    });
+
 });

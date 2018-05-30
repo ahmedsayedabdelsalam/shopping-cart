@@ -10,7 +10,7 @@
     </div>
     <!-- /.box-header -->
     <!-- form start -->
-    <form role="form" action="/admin/items/{{ $product->id }}" method="POST" enctype='multipart/form-data'>
+    <form role="form" action="/{{App::getLocale()}}/admin/items/{{ $product->id }}" method="POST" enctype='multipart/form-data'>
         {{ csrf_field() }}
         {{ method_field('PUT')}}
         <div class="box-body">

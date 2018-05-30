@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="register mt-3 col-md-4 offset-md-4">
-  <h1>Your Cart</h1>
+  <h1>{{ __('main.your_cart') }}</h1>
   @if(Session::has('cart'))
     <ul class="list-group">
       @foreach($products as $product)

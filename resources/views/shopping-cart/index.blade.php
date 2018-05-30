@@ -18,7 +18,7 @@
                 <h5 class="card-title"><a href="/products/{{ $product->slug }}">{{ $product->title }}</a></h5>
                 <p class="card-text">{{ $product->description }}</p>
                 <strong>{{ $product->price }}$</strong>
-                <a href="/shopping-cart/{{ $product->id }}" class="btn btn-success float-right">Add to Cart</a>
+                <a href="/shopping-cart/{{ $product->id }}" class="btn btn-success float-right">{{ __('main.add_to_cart') }}</a>
                 {{-- <ul class="list-unstyled">
                   @foreach($product->categories as $category)
                     <li>{{ $category->title }}</li>
