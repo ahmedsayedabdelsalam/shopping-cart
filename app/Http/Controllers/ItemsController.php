@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Product;
 
 use Illuminate\Support\Facades\Storage;
+use App\Notifications\NewProduct;
+use App\User;
+use Illuminate\Support\Facades\Notification;
 
 
 class ItemsController extends Controller
@@ -63,8 +66,9 @@ class ItemsController extends Controller
         
         $item->categories()->sync($request['cats']);
 
-
-
+        $users = User::all();
+        Notification::send($users, new NewProduct($item));
+        
         return redirect()->back()->with('alert-info', 'item created successfully');
     }
 

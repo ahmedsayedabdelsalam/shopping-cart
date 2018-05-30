@@ -6,7 +6,7 @@
 @include('partials.message')
 <div class="register mt-3 col-md-4 offset-md-4">
     <h1>{{ __('main.signin') }}</h1>
-    <form action="/signin" method="POST">
+    <form action="/{{App::getLocale()}}/signin" method="POST">
         {{ csrf_field() }}
         <div class="form-group">
             <label for="Email">Email address</label>
