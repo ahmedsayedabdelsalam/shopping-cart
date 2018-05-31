@@ -12,7 +12,7 @@ class Product extends Model
 {
     use HasSlug;
 
-    protected $fillable = ['imagePath', 'title', 'description', 'price'];
+    protected $fillable = ['imagePath', 'title', 'description', 'price', 'title_ar', 'description_ar', 'price_ar'];
 
     
     /**

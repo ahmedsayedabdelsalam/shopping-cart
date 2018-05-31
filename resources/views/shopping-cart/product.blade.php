@@ -9,13 +9,25 @@
 @section('content')
   @include('partials.message')
 
+  @php
+  if($locale == 'ar' && !empty($product->title_ar) && !empty($product->description_ar) && !empty($product->price_ar)) {
+    $productTilte = $product->title_ar;
+    $productDescription = $product->description_ar;
+    $productPrice = $product->price_ar;
+  } else {
+    $productTilte = $product->title;
+    $productDescription = $product->description;
+    $productPrice = $product->price;
+   }
+  @endphp
+
     <div class="card mt-3">
         <img class="card-img-top" src="{{ asset('storage/product_images/' . $product->imagePath) }}" alt="Card image cap">
         <div class="card-body">
-            <h5 class="card-title"><a href="/products/{{ $product->slug }}">{{ $product->title }}</a></h5>
-            <p class="card-text">{{ $product->description }}</p>
-            <strong>{{ $product->price }}$</strong>
-            <a href="/shopping-cart/{{ $product->id }}" class="btn btn-success float-right">Add to Cart</a>
+            <h5 class="card-title"><a href="/products/{{ $product->slug }}">{{ $productTilte }}</a></h5>
+            <p class="card-text">{{ $productDescription }}</p>
+            <strong>{{ $productPrice }}$</strong>
+            <a href="/shopping-cart/{{ $product->id }}" class="btn btn-success float-right">{{ __('main.add_to_cart') }}</a>
             {{-- <ul class="list-unstyled">
                 @foreach($product->categories as $category)
                 <li>{{ $category->title }}</li>

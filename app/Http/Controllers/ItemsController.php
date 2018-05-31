@@ -22,7 +22,8 @@ class ItemsController extends Controller
     public function index()
     {
         $products = Product::paginate(12);
-        return view('admin.items.items', compact('products'));
+        $locale = App::getLocale();
+        return view('admin.items.items', compact('products', 'locale'));
     }
 
     /**
@@ -47,6 +48,7 @@ class ItemsController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required|max:300',
+            'description_ar' => 'max:300',
             'price' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -61,6 +63,9 @@ class ItemsController extends Controller
         $item->title = $request['title'];
         $item->description = $request['description'];
         $item->price = $request['price'];
+        $item->title_ar = $request['title_ar'];
+        $item->description_ar = $request['description_ar'];
+        $item->price_ar = $request['price_ar'];
         $item->family_id = $request['family'];
         $item->save();
         
@@ -81,7 +86,8 @@ class ItemsController extends Controller
     public function show($id)
     {
         $product = Product::findOrFail($id);
-        return view('admin.items.item', compact('product'));
+        $locale = App::getLocale();
+        return view('admin.items.item', compact('product', 'locale'));
     }
 
     /**
@@ -110,6 +116,7 @@ class ItemsController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required|max:300',
+            'description_ar' => 'max:300',
             'price' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -128,6 +135,9 @@ class ItemsController extends Controller
         $item->title = $request['title'];
         $item->description = $request['description'];
         $item->price = $request['price'];
+        $item->title_ar = $request['title_ar'];
+        $item->description_ar = $request['description_ar'];
+        $item->price_ar = $request['price_ar'];
         $item->family_id = $request['family'];
         $item->save();
 

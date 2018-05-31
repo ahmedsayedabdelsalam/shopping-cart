@@ -20,12 +20,13 @@ class ProductsController extends Controller
 {
     public function index() {
         $products = Product::with('categories', 'family')->paginate(9);
-        return view('shopping-cart.index', compact('products'));
+        $locale = \App::getLocale();
+        return view('shopping-cart.index', compact('products', 'locale'));
     }
 
     public function show(Request $request, Product $product) {
-        
-        return view('shopping-cart.product', compact('product'));
+        $locale = \App::getLocale();
+        return view('shopping-cart.product', compact('product', 'locale'));
     }
 
     public function category(Request $request, Category $category) {

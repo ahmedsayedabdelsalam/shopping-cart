@@ -44,6 +44,22 @@
             @endforeach
         </select>
 
+        <br>
+        <hr>
+        <h3 class="text-center">Arabic</h3>
+        <div class="form-group">
+            <label for="title_ar">العنوان</label>
+            <input name="title_ar" type="text" class="form-control" id="title_ar" placeholder="العنوان" required>
+        </div>
+        <div class="form-group">
+            <label for="description_ar">الوصف</label>
+            <textarea id="description_ar" name="description_ar" class="form-control" cols="30" rows="4" placeholder="الوصف" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="price_ar">السعر</label>
+            <input name="price_ar" type="number" class="form-control" id="price_ar" placeholder="السعر" required>
+        </div>
+
         <div class="box-footer">
             <button type="submit" class="btn btn-primary">Add Item</button>
         </div>

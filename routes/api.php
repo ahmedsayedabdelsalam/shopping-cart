@@ -17,17 +17,26 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('register', 'API\AuthController@register');
-Route::post('login', 'API\AuthController@login');
-Route::post('logout', 'API\AuthController@logout');
-Route::get('users', 'API\AuthController@users');
-Route::get('roles', 'API\AuthController@roles');
-Route::get('/profile','API\AuthController@profile');
-Route::group(['prefix' => 'products'], function() {
-    Route::post('/{id}/addItem','API\OrderController@addItem');
-    Route::delete('/{id}/removeItem','API\OrderController@removeItem');
-    Route::post('/removeAll','API\OrderController@removeAll');
-    Route::get('/cart','API\OrderController@cart');
-    Route::post('/checkout','API\OrderController@checkout');
-});
-Route::apiResource('/products','API\ProductController');
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ],
+    function()
+    {
+        Route::post('register', 'API\AuthController@register');
+        Route::post('login', 'API\AuthController@login');
+        Route::post('logout', 'API\AuthController@logout');
+        Route::get('users', 'API\AuthController@users');
+        Route::get('roles', 'API\AuthController@roles');
+        Route::get('/profile','API\AuthController@profile');
+        Route::group(['prefix' => 'products'], function() {
+            Route::post('/{id}/addItem','API\OrderController@addItem');
+            Route::delete('/{id}/removeItem','API\OrderController@removeItem');
+            Route::post('/removeAll','API\OrderController@removeAll');
+            Route::get('/cart','API\OrderController@cart');
+            Route::post('/checkout','API\OrderController@checkout');
+        });
+        Route::apiResource('/products','API\ProductController');
+    }
+);
