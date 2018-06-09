@@ -23,6 +23,124 @@ class AuthController extends Controller
     $this->middleware('auth:api', ['except' => ['login', 'register', 'users']]);
   }
 
+/**
+ * @OAS\Post(
+ *     path="/register",
+ *     tags={"user"},
+ *     summary="user sign up ",
+ *     operationId="userSignup",
+ *     @OAS\Parameter(
+ *         name="lang",
+ *         in="header",
+ *         description="language",
+ *         @OAS\Schema(
+ *             type="string",
+ *             example="en"
+ *         )
+ *     ),
+ *     @OAS\RequestBody(
+ *         description="Input data format",
+ *         @OAS\MediaType(
+ *         mediaType="application/json",
+ *         @OAS\Schema(
+ *             @OAS\Property(
+ *                     property="image",
+ *                     description="user image",
+ *                     type="file",
+ *             ),
+ *             @OAS\Property(
+ *                     property="name",
+ *                     description="user name ",
+ *                     type="string",
+ *             ),
+ *             @OAS\Property(
+ *                     property="national_id",
+ *                     description="user national id",
+ *                     type="integer",
+ *                     example=29501090400888,
+ *             ),
+ *             @OAS\Property(
+ *                     property="email",
+ *                     description="user email",
+ *                     type="string",
+ *                     example="mego@yahoo.com",
+ *             ),
+ *             @OAS\Property(
+ *                     property="phone",
+ *                     description="user phone number",
+ *                     type="string",
+ *                     example="(911) 297-4111",
+ *             ),
+ *             @OAS\Property(
+ *                     property="job_title_id",
+ *                     description="user job title id",
+ *                     type="integer",
+ *                     example=4,
+ *             ),
+ *             @OAS\Property(
+ *                     property="birth_date",
+ *                     description="user birth date",
+ *                     type="string",
+ *                     example = "2000-04-19 12:41:55",
+ *             ),
+ *             @OAS\Property(
+ *                     property="hiring_date",
+ *                     description="user hiring date",
+ *                     type="string",
+ *                     example = "2006-03-03 12:41:55",
+ *             ),
+ *             @OAS\Property(
+ *                     property="job_family_id",
+ *                     description="user job family id ",
+ *                     type="integer",
+ *                     example =2,
+ *             ),
+ *             @OAS\Property(
+ *                     property="product_line_id",
+ *                     description="user product line id ",
+ *                     type="integer",
+ *                     example =10,
+ *             ),
+ *             @OAS\Property(
+ *                     property="location_id",
+ *                     description="user location id ",
+ *                     type="integer",
+ *                     example =10,
+ *             ),
+ *             @OAS\Property(
+ *                     property="department_id",
+ *                     description="user department id ",
+ *                     type="integer",
+ *                     example =3,
+ *             ),
+ *         ),
+ *         ),
+ *     ),
+ *     @OAS\Response(
+ *         response=200,
+ *         description="successful operation",
+ *         @OAS\MediaType(
+ *              mediaType="application/json",
+ *              @OAS\Schema(
+ *                     type="string"
+ *              )
+ *         ),
+ *     ),
+ *     @OAS\Response(
+ *         response=400,
+ *         description="Invalid username/password supplied",
+ *         @OAS\MediaType(
+ *              mediaType="application/json",
+ *              @OAS\Schema(
+ *                     type="string"
+ *              )
+ *         ),
+ *     ),
+ *     security={
+ *         {"Authorization": {}}
+ *     }
+ * )
+ */
   public function register(Request $request)
   {
       $this->validate($request, [

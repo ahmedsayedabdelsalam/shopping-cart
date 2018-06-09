@@ -9,6 +9,15 @@ use App\User;
 use Auth;
 use App\Events\UserCreatedEvent;
 
+/**
+ * @SWG\Swagger(
+ *   basePath="http://api.shopping-cart/api",
+ *   @SWG\Info(
+ *     title="Shopping Cart",
+ *     version="1.0.0"
+ *   )
+ * )
+ */
 
 class UsersController extends Controller
 {

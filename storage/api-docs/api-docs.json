@@ -1,0 +1,10 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Shopping Cart",
+        "version": "1.0.0"
+    },
+    "basePath": "http://api.shopping-cart/api",
+    "paths": {},
+    "definitions": {}
+}
